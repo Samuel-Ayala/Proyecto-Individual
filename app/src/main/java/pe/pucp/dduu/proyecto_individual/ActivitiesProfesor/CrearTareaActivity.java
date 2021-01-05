@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,83 +78,129 @@ public class CrearTareaActivity extends AppCompatActivity {
         agregarTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog dialog = new ProgressDialog(CrearTareaActivity.this);
+                dialog.setMessage("Creando tarea ...");
+                dialog.setCancelable(false);
+                dialog.show();
 
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                DatabaseReference userDB = FirebaseDatabase.getInstance().getReference().child("usuarios");
-                userDB.child(user.getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
-                            grado[0] = snapshot.child("grado").getValue().toString();
-                            seccion[0] = snapshot.child("seccion").getValue().toString();
-                        }else {
-                            Toast.makeText(getApplicationContext(), "Error: la base de datos no responde", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-
-                final String nombreCarpetaDispositivo = curso.getText().toString() + "-" + fechaLimite.getText().toString() ;
-
-                if (rutaDeArchivo != null){
-                    StorageReference stReference = FirebaseStorage.getInstance().getReference();
-                    final StorageReference fotoRef = stReference.child("fotos").child(nombreCarpetaDispositivo);
-                    fotoRef.putFile(rutaDeArchivo).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                if (!curso.getText().toString().isEmpty() && !fechaLimite.getText().toString().isEmpty()){
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    DatabaseReference userDB = FirebaseDatabase.getInstance().getReference().child("usuarios");
+                    userDB.child(user.getUid()).addValueEventListener(new ValueEventListener() {
                         @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if (!task.isSuccessful()){
-                                throw new Exception();
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                grado[0] = snapshot.child("grado").getValue().toString();
+                                seccion[0] = snapshot.child("seccion").getValue().toString();
+                            }else {
+                                Toast.makeText(getApplicationContext(), "Error: la base de datos no responde", Toast.LENGTH_SHORT).show();
                             }
-                            return fotoRef.getDownloadUrl();
                         }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            Uri downloadLink = task.getResult();
-                            final DatabaseReference currentUserDB = userDatabase.child(grado[0] + seccion[0]).child(nombreCarpetaDispositivo);
-                            currentUserDB.child("curso y titulo de tarea").setValue(curso.getText().toString());
-                            currentUserDB.child("premisa").setValue(premisa.getText().toString());
-                            currentUserDB.child("materiales").setValue(materiales.getText().toString());
-                            currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
-                            currentUserDB.child("foto").setValue(downloadLink.toString());
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
+                        public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                }else if (imbytes != null){
-                    StorageReference stReference = FirebaseStorage.getInstance().getReference();
-                    final StorageReference fotoRef = stReference.child("fotos").child(nombreCarpetaDispositivo);
-                    fotoRef.putBytes(imbytes).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                        @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if (!task.isSuccessful()){
-                                throw new Exception();
+
+                    final String nombreCarpetaDispositivo = curso.getText().toString() + "-" + fechaLimite.getText().toString() ;
+
+                    if (rutaDeArchivo != null){
+                        StorageReference stReference = FirebaseStorage.getInstance().getReference();
+                        final StorageReference fotoRef = stReference.child("fotos").child(nombreCarpetaDispositivo);
+                        fotoRef.putFile(rutaDeArchivo).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                if (!task.isSuccessful()){
+                                    throw new Exception();
+                                }
+                                return fotoRef.getDownloadUrl();
                             }
-                            return fotoRef.getDownloadUrl();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            Uri downloadLink = task.getResult();
-                            final DatabaseReference currentUserDB = userDatabase.child(grado[0] + seccion[0]).child(nombreCarpetaDispositivo);
-                            currentUserDB.child("curso y titulo de tarea").setValue(curso.getText().toString());
-                            currentUserDB.child("premisa").setValue(premisa.getText().toString());
-                            currentUserDB.child("materiales").setValue(materiales.getText().toString());
-                            currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
-                            currentUserDB.child("foto").setValue(downloadLink.toString());
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                Uri downloadLink = task.getResult();
+                                final DatabaseReference currentUserDB = userDatabase.child(grado[0] + seccion[0]).child(nombreCarpetaDispositivo);
+
+                                currentUserDB.child("curso y titulo de tarea").setValue(curso.getText().toString());
+                                if (!premisa.getText().toString().isEmpty()){
+                                    currentUserDB.child("premisa").setValue(premisa.getText().toString());
+                                }else{
+                                    currentUserDB.child("premisa").setValue("aplicar lo visto en clase, los niños ya saben cómo hacerlo. Cualquier consulta adicional, me escriben");
+                                }
+
+                                if (!materiales.getText().toString().isEmpty()){
+                                    currentUserDB.child("materiales").setValue(materiales.getText().toString());
+                                }else {
+                                    currentUserDB.child("materiales").setValue("Esta tarea no necesita el empleo de materiales");
+                                }
+
+                                currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
+                                Log.d("FOTOOOO",downloadLink.toString());
+
+                                if (!downloadLink.toString().isEmpty()){
+                                    currentUserDB.child("foto").setValue(downloadLink.toString());
+                                }else {
+                                    currentUserDB.child("foto").setValue("https://firebasestorage.googleapis.com/v0/b/proyecto-individual---ap-c1043.appspot.com/o/fotos%2Fimagen_no-disponible.jpg?alt=media&token=c03cb9a4-cd3e-4fe6-a163-e9fdf31970e7");
+                                }
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                dialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else if (imbytes != null){
+                        StorageReference stReference = FirebaseStorage.getInstance().getReference();
+                        final StorageReference fotoRef = stReference.child("fotos").child(nombreCarpetaDispositivo);
+                        fotoRef.putBytes(imbytes).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                if (!task.isSuccessful()){
+                                    throw new Exception();
+                                }
+                                return fotoRef.getDownloadUrl();
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                Uri downloadLink = task.getResult();
+                                final DatabaseReference currentUserDB = userDatabase.child(grado[0] + seccion[0]).child(nombreCarpetaDispositivo);
+                                    currentUserDB.child("curso y titulo de tarea").setValue(curso.getText().toString());
+
+                                    if (!premisa.getText().toString().isEmpty()){
+                                        currentUserDB.child("premisa").setValue(premisa.getText().toString());
+                                    }else{
+                                        currentUserDB.child("premisa").setValue("aplicar lo visto en clase, los niños ya saben cómo hacerlo. Cualquier consulta adicional, me escriben");
+                                    }
+
+                                    if (!materiales.getText().toString().isEmpty()){
+                                        currentUserDB.child("materiales").setValue(materiales.getText().toString());
+                                    }else {
+                                        currentUserDB.child("materiales").setValue("Esta tarea no necesita el empleo de materiales");
+                                    }
+
+                                    currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
+                                Log.d("FOTOOOO",downloadLink.toString());
+
+                                    if (!downloadLink.toString().isEmpty()){
+                                        currentUserDB.child("foto").setValue(downloadLink.toString());
+                                    }else {
+                                        currentUserDB.child("foto").setValue("https://firebasestorage.googleapis.com/v0/b/proyecto-individual---ap-c1043.appspot.com/o/fotos%2Fimagen_no-disponible.jpg?alt=media&token=c03cb9a4-cd3e-4fe6-a163-e9fdf31970e7");
+                                    }
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                dialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }else {
+                    dialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "Debe ingresar al menos el curso, el titulo correspondiente de la tarea a asignar, la fecha límite de entrega y una imagen", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 

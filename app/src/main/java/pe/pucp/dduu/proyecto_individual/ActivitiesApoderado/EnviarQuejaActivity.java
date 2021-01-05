@@ -69,7 +69,7 @@ public class EnviarQuejaActivity extends AppCompatActivity {
                     }
                 });
 
-                Toast.makeText(getApplicationContext(), "El auxiliar se comunicará con usted a la brevedad", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Mensaje enviado exitosamente: el auxiliar del salón se comunicará con usted a la brevedad", Toast.LENGTH_SHORT).show();
                 //Intent i = new Intent(getApplicationContext(), ApoderadoActivity.class);
                 //startActivity(i);
             }

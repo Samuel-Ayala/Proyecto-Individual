@@ -83,16 +83,16 @@ public class RegisterFragment extends Fragment {
                 usuario.setGradoEstudiante(grado);
                 usuario.setSeccionEstudiante(seccion);
 
-                if (!name.isEmpty() && !email.isEmpty() && !contra.isEmpty() && !dni.isEmpty() && !celular.isEmpty() && !nameEstudiante.isEmpty()
-                    && !rol.isEmpty() && !codigo.isEmpty() && !grado.isEmpty() && !seccion.isEmpty()) {
+                if (name.isEmpty() || email.isEmpty() || contra.isEmpty() || dni.isEmpty() || celular.isEmpty() || nameEstudiante.isEmpty()
+                    || rol.isEmpty() || codigo.isEmpty() || grado.isEmpty() || seccion.isEmpty()) {
                     LoginRegistroActivity m2 = (LoginRegistroActivity) getActivity();
-                    m2.registro(usuario, contra);
+                    m2.errorDeRegistro();
                 }else if (codigo.replaceAll("\\s","").length() > 8 || codigo.replaceAll("\\s","").length() < 8){
                     LoginRegistroActivity m2 = (LoginRegistroActivity) getActivity();
                     m2.errorDeCodigo();
                 }else {
                     LoginRegistroActivity m2 = (LoginRegistroActivity) getActivity();
-                    m2.errorDeRegistro();
+                    m2.registro(usuario, contra);
                 }
 
             }

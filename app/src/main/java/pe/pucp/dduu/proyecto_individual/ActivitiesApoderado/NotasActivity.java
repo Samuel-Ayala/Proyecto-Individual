@@ -35,7 +35,6 @@ public class NotasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), EnviarQuejaActivity.class);
                 startActivity(i);
-                finish();
             }
         });
         //////////////

@@ -107,8 +107,8 @@ public class LoginRegistroActivity extends AppCompatActivity {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void mostrarError(){
-        Toast.makeText(getApplicationContext(),"Error: el usuario no se pudo autenticar correctamente",
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Error: la direccion de correo electrónico y/o contraseña son invalidos",
+                Toast.LENGTH_LONG).show();
     }
 
     public void ingresoExitosoLoginUsuarioCliente(String inputEmail, String rol){
@@ -118,8 +118,8 @@ public class LoginRegistroActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), ApoderadoActivity.class);
         i.putExtras(params);
         startActivity(i);
-        EditText inputPwd = (EditText) findViewById(R.id.inputPassword);
-        inputPwd.setText("");
+        //EditText inputPwd = (EditText) findViewById(R.id.inputPassword);
+        //inputPwd.setText("");
     }
 
     public void ingresoExitosoLoginUsuarioTI(String inputEmail, String rol){
@@ -129,8 +129,6 @@ public class LoginRegistroActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), ProfesorActivity.class);
         i.putExtras(params);
         startActivity(i);
-        EditText inputPwd = (EditText) findViewById(R.id.inputPassword);
-        inputPwd.setText("");
     }
 
 
@@ -170,7 +168,7 @@ public class LoginRegistroActivity extends AppCompatActivity {
 
                     }else {
                         dialog.dismiss();
-                        mostrarError();
+                        Toast.makeText(getApplicationContext(),"Error: debe ingresar una dirección de correo electrónico válida", Toast.LENGTH_LONG).show();
                     }
                 }
             });

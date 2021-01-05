@@ -68,6 +68,7 @@ public class ApoderadoActivity extends AppCompatActivity {
                 pref.apply();
                 FirebaseAuth.getInstance().signOut();
                 onBackPressed();
+
             }
         });
         //////////////////////////////////////////////////////////////////////////////////////////////////////
