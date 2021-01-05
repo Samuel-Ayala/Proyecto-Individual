@@ -61,6 +61,7 @@ public class EnviarQuejaActivity extends AppCompatActivity {
                         currentUserDB.child("Estudiante").setValue(nombreEst[0]);
                         currentUserDB.child("Contenido").setValue(textoQueja.getText().toString());
                         currentUserDB.child("Codigo").setValue(codigo[0]);
+                        textoQueja.setText("");
                     }
 
                     @Override
@@ -68,6 +69,7 @@ public class EnviarQuejaActivity extends AppCompatActivity {
 
                     }
                 });
+
 
                 Toast.makeText(getApplicationContext(), "Mensaje enviado exitosamente: el auxiliar del salón se comunicará con usted a la brevedad", Toast.LENGTH_SHORT).show();
                 //Intent i = new Intent(getApplicationContext(), ApoderadoActivity.class);

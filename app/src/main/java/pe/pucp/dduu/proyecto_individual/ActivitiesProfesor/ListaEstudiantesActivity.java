@@ -57,11 +57,13 @@ public class ListaEstudiantesActivity extends AppCompatActivity {
 
         //Obteniendo estudiantes con el respectivo identificador de grado y seccion
         final List<Estudiante> listaEstudiante = new ArrayList<>();
-        Estudiante e2 = new Estudiante();
-        e2.setNombreEstudiante("Estudiante - ");
-        e2.setNombreApoderado("Apoderado - ");
-        e2.setNumeroTelefonicoApoderado("Teléfono");
+        /*Estudiante e2 = new Estudiante();
+        e2.setNombreEstudiante("Estudiante ");
+        e2.setNombreApoderado(" Apoderado ");
+        e2.setNumeroTelefonicoApoderado(" Teléfono");
         listaEstudiante.add(e2);
+
+         */
 
         DatabaseReference estudianteDatabase = FirebaseDatabase.getInstance().getReference();
         estudianteDatabase.child("usuarios").addValueEventListener(new ValueEventListener() {

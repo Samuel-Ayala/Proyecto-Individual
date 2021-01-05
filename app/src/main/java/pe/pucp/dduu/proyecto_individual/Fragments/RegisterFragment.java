@@ -90,7 +90,10 @@ public class RegisterFragment extends Fragment {
                 }else if (codigo.replaceAll("\\s","").length() > 8 || codigo.replaceAll("\\s","").length() < 8){
                     LoginRegistroActivity m2 = (LoginRegistroActivity) getActivity();
                     m2.errorDeCodigo();
-                }else {
+                }else if (dni.replaceAll("\\s","").length() > 8 || dni.replaceAll("\\s","").length() < 8){
+                    LoginRegistroActivity m2 = (LoginRegistroActivity) getActivity();
+                    m2.errorDeDni();
+                } else {
                     LoginRegistroActivity m2 = (LoginRegistroActivity) getActivity();
                     m2.registro(usuario, contra);
                 }

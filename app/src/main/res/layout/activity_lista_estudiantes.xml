@@ -20,7 +20,18 @@
             android:id="@+id/listaEstudiantesTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="32sp"
             android:text="Lista de estudiantes"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/itemsEstudaintes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textSize="24sp"
+            android:text="Estudiante - Apoderado - Telefono"
+            android:textStyle="bold"
             android:textAlignment="center" />
 
         <androidx.recyclerview.widget.RecyclerView

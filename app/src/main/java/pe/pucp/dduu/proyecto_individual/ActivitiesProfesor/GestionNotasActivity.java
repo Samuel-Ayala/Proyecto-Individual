@@ -146,6 +146,7 @@ public class GestionNotasActivity extends AppCompatActivity {
         if (Integer.parseInt(notaDelEstudiante.getText().toString()) <= 20 && Integer.parseInt(notaDelEstudiante.getText().toString()) >= 0){
             notasDatabase.child(tareaAsignada.getSelectedItem().toString()).setValue(notaDelEstudiante.getText().toString());
             dialog.dismiss();
+            notaDelEstudiante.setText("");
             Toast.makeText(getApplicationContext(),"Nota publicada exitosamente", Toast.LENGTH_LONG).show();
         }else {
             dialog.dismiss();

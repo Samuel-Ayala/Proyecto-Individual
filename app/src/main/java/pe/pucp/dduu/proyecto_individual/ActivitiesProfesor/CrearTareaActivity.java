@@ -74,6 +74,7 @@ public class CrearTareaActivity extends AppCompatActivity {
         final String dateString = sdf.format(date);
         final String[] grado = new String[1];
         final String[] seccion = new String[1];
+        String gradoPerf, seccionPerf;
 
         agregarTarea.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +92,7 @@ public class CrearTareaActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()){
                                 grado[0] = snapshot.child("grado").getValue().toString();
+
                                 seccion[0] = snapshot.child("seccion").getValue().toString();
                             }else {
                                 Toast.makeText(getApplicationContext(), "Error: la base de datos no responde", Toast.LENGTH_SHORT).show();
@@ -145,6 +147,10 @@ public class CrearTareaActivity extends AppCompatActivity {
                         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
+                                curso.setText("");
+                                premisa.setText("");
+                                materiales.setText("");
+                                fechaLimite.setText("");
                                 dialog.dismiss();
                                 Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
                             }
@@ -180,7 +186,6 @@ public class CrearTareaActivity extends AppCompatActivity {
                                     }
 
                                     currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
-                                Log.d("FOTOOOO",downloadLink.toString());
 
                                     if (!downloadLink.toString().isEmpty()){
                                         currentUserDB.child("foto").setValue(downloadLink.toString());
@@ -191,14 +196,66 @@ public class CrearTareaActivity extends AppCompatActivity {
                         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
+                                curso.setText("");
+                                premisa.setText("");
+                                materiales.setText("");
+                                fechaLimite.setText("");
                                 dialog.dismiss();
                                 Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
                             }
                         });
+                    }else {
+                        //Otra vez obtenemos grado y seccion
+                        final String[] grado1 = new String[1];
+                        final String[] seccion1 = new String[1];
+                        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+                        DatabaseReference userDB1 = FirebaseDatabase.getInstance().getReference().child("usuarios");
+                        userDB1.child(user1.getUid()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()){
+                                    grado1[0] = snapshot.child("grado").getValue().toString();
+                                    seccion1[0] = snapshot.child("seccion").getValue().toString();
+
+                                    Log.d("Gradsec",grado1[0] + seccion1[0]);
+                                    final DatabaseReference currentUserDB = userDatabase.child(grado1[0] + seccion1[0]).child(nombreCarpetaDispositivo);
+                                    currentUserDB.child("curso y titulo de tarea").setValue(curso.getText().toString());
+
+                                    if (!premisa.getText().toString().isEmpty()){
+                                        currentUserDB.child("premisa").setValue(premisa.getText().toString());
+                                    }else{
+                                        currentUserDB.child("premisa").setValue("aplicar lo visto en clase, los niños ya saben cómo hacerlo. Cualquier consulta adicional, me escriben");
+                                    }
+
+                                    if (!materiales.getText().toString().isEmpty()){
+                                        currentUserDB.child("materiales").setValue(materiales.getText().toString());
+                                    }else {
+                                        currentUserDB.child("materiales").setValue("Esta tarea no necesita el empleo de materiales");
+                                    }
+
+                                    currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
+                                    currentUserDB.child("foto").setValue("https://firebasestorage.googleapis.com/v0/b/proyecto-individual---ap-c1043.appspot.com/o/fotos%2Fimagen_no-disponible.jpg?alt=media&token=c03cb9a4-cd3e-4fe6-a163-e9fdf31970e7");
+
+                                    curso.setText("");
+                                    premisa.setText("");
+                                    materiales.setText("");
+                                    fechaLimite.setText("");
+
+                                    dialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos sin foto", Toast.LENGTH_LONG).show();
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "Error: la base de datos no responde", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                        ////
                     }
                 }else {
                     dialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "Debe ingresar al menos el curso, el titulo correspondiente de la tarea a asignar, la fecha límite de entrega y una imagen", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Debe ingresar al menos el curso, el titulo correspondiente de la tarea a asignar y la fecha límite de entrega", Toast.LENGTH_LONG).show();
                 }
 
             }

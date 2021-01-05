@@ -90,7 +90,7 @@ public class LoginRegistroActivity extends AppCompatActivity {
                             }
                         } else {
                             dialog.dismiss();
-                            mostrarError();
+                            Toast.makeText(getApplicationContext(), "Error: el proceso ha tardado en responder, intente más tarde", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -206,6 +206,10 @@ public class LoginRegistroActivity extends AppCompatActivity {
 
     public void errorDeCodigo() {
         Toast.makeText(getApplicationContext(),"El código debe tener 8 caracteres", Toast.LENGTH_LONG).show();
+    }
+
+    public void errorDeDni() {
+        Toast.makeText(getApplicationContext(),"Debe ingresar un número de DNI válido", Toast.LENGTH_LONG).show();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
