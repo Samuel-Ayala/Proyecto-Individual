@@ -90,7 +90,7 @@ public class LoginRegistroActivity extends AppCompatActivity {
                             }
                         } else {
                             dialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Error: el proceso ha tardado en responder, intente más tarde", Toast.LENGTH_SHORT).show();
+                            mostrarError();
                         }
                     }
                 });
