@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivitiesProfesor.ProfesorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/bienvenidaProfesor"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            android:textColor="#010209" />
+
+        <Button
+            android:id="@+id/buttonGestionNotas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/boton_redondeado"
+            android:text="Gestion de calificaciones"
+            android:textColor="@color/common_google_signin_btn_text_dark" />
+
+        <Button
+            android:id="@+id/buttonGestionTareas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/boton_redondeado"
+            android:text="gestion de tareas"
+            android:textColor="@color/common_google_signin_btn_text_dark"
+            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName11"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
+
+        <Button
+            android:id="@+id/buttonListaEstudiantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/boton_redondeado"
+            android:text="Lista de estudiantes"
+            android:textColor="@color/common_google_signin_btn_text_dark"
+            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName11"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
+
+
+        <TextView
+            android:id="@+id/queja2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Consultas, quejas y/o sugerencias de los padres:"
+            android:textAlignment="center"
+            android:textColor="#010209"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/verQuejas"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:srcCompat="@mipmap/imagen_mensaje_foreground" />
+
+        <Button
+            android:id="@+id/cerrarSesionProfe"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/boton_registro"
+            android:text="Cerrar Sesión"
+            android:textColor="#FF050505" />
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

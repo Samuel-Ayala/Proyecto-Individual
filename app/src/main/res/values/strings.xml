@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Proyecto-Individual</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="subtituloRegistro">Ingrese sus datos como padre o apoderado:</string>
+    <string name="subtituloRegistro2">Ingrese los datos del estudiante a quien apodera:</string>
+    <string name="queja">¿Tiene alguna queja o sugerencia con respecto a algún curso? Envíenos un mensaje y el auxiliar se comunicará con usted. Pulse sobre la imagen</string>
+    <string-array name="grados">
+        <item>--- Seleccione el grado ---</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="secciones">
+        <item>--- Seleccione la sección ---</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="tareas">
+        <item>--- Seleccione la tarea ---</item>
+        <item>Tarea 1 - Bisutería</item>
+        <item>Tarea 2 - Bisutería</item>
+        <item>Tarea 3 - Bisutería</item>
+        <item>Tarea 1 - Escultura</item>
+        <item>Tarea 2 - Escultura</item>
+        <item>Tarea 3 - Escultura</item>
+    </string-array>
+</resources>

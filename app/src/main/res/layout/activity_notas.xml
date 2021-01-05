@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivitiesApoderado.NotasActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tituloNotas"
+                android:layout_width="300dp"
+                android:layout_marginTop="32dp"
+                android:layout_height="wrap_content"
+                android:text="Notas del estudiante"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="#010209"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/Bisutería"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Bisutería"
+                android:textColor="#010209"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tarea1Mate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Tarea 1:"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaTarea1Mate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="100dp"
+                    android:text="Aún no calificado"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tarea2Mate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Tarea 2:"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaTarea2Mate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="100dp"
+                    android:text="Aún no calificado"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tarea3Mate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Tarea 3:"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaTarea3Mate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="100dp"
+                    android:text="Aún no calificado"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/promedioMate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Promedio:"
+                    android:textStyle="bold"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaPromedioMate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="83dp"
+                    android:textStyle="bold"
+                    android:text="-"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/dibujo"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Escultura"
+                android:textColor="#010209"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tarea1Comu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Tarea 1:"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaTarea1Comu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="100dp"
+                    android:text="Aún no calificado"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tarea2Comu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Tarea 2:"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaTarea2Comu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="100dp"
+                    android:text="Aún no calificado"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tarea3Comu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Tarea 3:"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaTarea3Comu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="100dp"
+                    android:text="Aún no calificado"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/promedioComu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Promedio:"
+                    android:textStyle="bold"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/notaPromedioComu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="83dp"
+                    android:textStyle="bold"
+                    android:text="-"
+                    android:textColor="#010209"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/enviarConsulta"
+                android:layout_width="310dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/boton_registro"
+                android:text="Consultar sobre la(s) calificacion(es)"
+                android:textColor="#FF050505"
+                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName11"
+                app:layout_constraintHorizontal_bias="0.482"
+                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
