@@ -1,6 +1,8 @@
 package pe.pucp.dduu.proyecto_individual.Entity;
 
-public class Tareas {
+import java.io.Serializable;
+
+public class Tareas implements Serializable {
     private String contenido;
     private String cursoTarea;
     private String materiales;

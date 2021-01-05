@@ -73,12 +73,13 @@ public class ProfesorActivity extends AppCompatActivity {
         });
         //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        Button notas,tareas, verListaEstudiantes;
+        Button notas,tareas, verListaEstudiantes, listaTareasProfe;
         ImageView verQuejas;
         final TextView bienvenida;
 
         notas = (Button) findViewById(R.id.buttonGestionNotas);
         tareas = (Button) findViewById(R.id.buttonGestionTareas);
+        listaTareasProfe = (Button) findViewById(R.id.buttonListaTareasProfe);
         verListaEstudiantes = (Button) findViewById(R.id.buttonListaEstudiantes);
         verQuejas = (ImageView) findViewById(R.id.verQuejas);
         bienvenida = (TextView) findViewById(R.id.bienvenidaProfesor);
@@ -130,6 +131,14 @@ public class ProfesorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ListaEstudiantesActivity.class);
+                startActivity(i);
+            }
+        });
+        ///
+        listaTareasProfe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ListaEditTareasActivity.class);
                 startActivity(i);
             }
         });

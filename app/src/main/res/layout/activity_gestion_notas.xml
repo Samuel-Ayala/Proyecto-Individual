@@ -63,17 +63,17 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/publicarNota"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="publicar calificacion"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
-            android:background="@drawable/boton_redondeado"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/publicarNota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="publicar calificacion"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:background="@drawable/boton_redondeado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
 

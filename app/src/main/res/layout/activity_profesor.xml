@@ -62,6 +62,21 @@
             app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
 
+        <Button
+            android:id="@+id/buttonListaTareasProfe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/boton_redondeado"
+            android:text="Lista de tareas"
+            android:textColor="@color/common_google_signin_btn_text_dark"
+            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName11"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
+
 
         <TextView
             android:id="@+id/queja2"
