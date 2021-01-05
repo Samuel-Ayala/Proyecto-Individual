@@ -54,6 +54,7 @@ public class NotasActivity extends AppCompatActivity {
         final String[] gradoEst = new String[1];
         final String[] seccionEst = new String[1];
         final String[] codigo = new String[1];
+        final String[] nombreEst = new String[1];
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference userDB = FirebaseDatabase.getInstance().getReference().child("usuarios");
@@ -63,12 +64,13 @@ public class NotasActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     gradoEst[0] = snapshot.child("grado").getValue().toString();
                     seccionEst[0] = snapshot.child("seccion").getValue().toString();
+                    nombreEst[0] = snapshot.child("nombre estudiante").getValue().toString();
                     codigo[0] = snapshot.child("codigo").getValue().toString();
 
 
                     //Obteniendo notas
                     DatabaseReference userDB = FirebaseDatabase.getInstance().getReference().child("notas");
-                    userDB.child(gradoEst[0] + seccionEst[0]).child(codigo[0]).addValueEventListener(new ValueEventListener() {
+                    userDB.child(gradoEst[0] + seccionEst[0]).child(nombreEst[0] + " - " +codigo[0]).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()){
@@ -104,14 +106,14 @@ public class NotasActivity extends AppCompatActivity {
                                 }
 
                                 try {
-                                    float promMate = Integer.parseInt(snapshot.child("Tarea 1 - Bisutería").getValue().toString())/3 + Integer.parseInt(snapshot.child("Tarea 2 - Bisutería").getValue().toString())/3 + Integer.parseInt(snapshot.child("Tarea 3 - Bisutería").getValue().toString())/3;
+                                    float promMate = (Integer.parseInt(snapshot.child("Tarea 1 - Bisutería").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 2 - Bisutería").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 3 - Bisutería").getValue().toString()))/3;
                                     promedioMate.setText(String.valueOf(promMate));
                                 }catch (Exception e){
                                     promedioMate.setText("-");
                                 }
 
                                 try {
-                                    float promComu = Integer.parseInt(snapshot.child("Tarea 1 - Escultura").getValue().toString())/3 + Integer.parseInt(snapshot.child("Tarea 2 - Escultura").getValue().toString())/3 + Integer.parseInt(snapshot.child("Tarea 3 - Escultura").getValue().toString())/3;
+                                    float promComu = (Integer.parseInt(snapshot.child("Tarea 1 - Escultura").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 2 - Escultura").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 3 - Escultura").getValue().toString()))/3;
                                     promedioComu.setText(String.valueOf(promComu));
                                 }catch (Exception e){
                                     promedioComu.setText("-");
@@ -119,7 +121,7 @@ public class NotasActivity extends AppCompatActivity {
 
 
                             }else {
-                                Toast.makeText(getApplicationContext(), "Error: la base de datos no responde", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Aún no tiene calificaciones por revisar", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -130,7 +132,7 @@ public class NotasActivity extends AppCompatActivity {
 
 
                 }else {
-                    Toast.makeText(getApplicationContext(), "Error: la base de datos no responde", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Aún no tiene calificaciones por revisar", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

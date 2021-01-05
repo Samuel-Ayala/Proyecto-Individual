@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -117,7 +118,8 @@ public class LoginRegistroActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), ApoderadoActivity.class);
         i.putExtras(params);
         startActivity(i);
-        finish();
+        EditText inputPwd = (EditText) findViewById(R.id.inputPassword);
+        inputPwd.setText("");
     }
 
     public void ingresoExitosoLoginUsuarioTI(String inputEmail, String rol){
@@ -127,7 +129,8 @@ public class LoginRegistroActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), ProfesorActivity.class);
         i.putExtras(params);
         startActivity(i);
-        finish();
+        EditText inputPwd = (EditText) findViewById(R.id.inputPassword);
+        inputPwd.setText("");
     }
 
 
@@ -201,6 +204,10 @@ public class LoginRegistroActivity extends AppCompatActivity {
 
     public void errorDeRegistro() {
         Toast.makeText(getApplicationContext(),"Debe llenar todos los campos", Toast.LENGTH_LONG).show();
+    }
+
+    public void errorDeCodigo() {
+        Toast.makeText(getApplicationContext(),"El código debe tener 8 caracteres", Toast.LENGTH_LONG).show();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

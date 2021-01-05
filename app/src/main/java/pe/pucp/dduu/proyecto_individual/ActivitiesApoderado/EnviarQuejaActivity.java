@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+
 import pe.pucp.dduu.proyecto_individual.R;
 
 public class EnviarQuejaActivity extends AppCompatActivity {
@@ -31,6 +33,8 @@ public class EnviarQuejaActivity extends AppCompatActivity {
         final EditText textoQueja;
         final String[] codigo = new String[1];
         final String[] nombreEst = new String[1];
+        final String[] grado = new String[1];
+        final String[] seccion = new String[1];
 
         textoQueja = (EditText) findViewById(R.id.textoQueja);
         btnEnviarQueja = (Button) findViewById(R.id.buttonEnviarQueja);
@@ -40,16 +44,23 @@ public class EnviarQuejaActivity extends AppCompatActivity {
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference().child("quejas sugerencias");
 
+                long date = System.currentTimeMillis();
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd, yyyy h:mm a");
+                final String dateString = sdf.format(date);
+
                 DatabaseReference estudianteDatabase = FirebaseDatabase.getInstance().getReference();
                 estudianteDatabase.child("usuarios").child(user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         codigo[0] = snapshot.child("codigo").getValue().toString();
                         nombreEst[0] = snapshot.child("nombre estudiante").getValue().toString();
+                        grado[0] = snapshot.child("grado").getValue().toString();
+                        seccion[0] = snapshot.child("seccion").getValue().toString();
 
-                        DatabaseReference currentUserDB = userDatabase.child(user.getUid() + "-" + codigo[0]);
+                        DatabaseReference currentUserDB = userDatabase.child(grado[0] + seccion[0]).child(user.getUid() + "-" + dateString);
                         currentUserDB.child("Estudiante").setValue(nombreEst[0]);
                         currentUserDB.child("Contenido").setValue(textoQueja.getText().toString());
+                        currentUserDB.child("Codigo").setValue(codigo[0]);
                     }
 
                     @Override

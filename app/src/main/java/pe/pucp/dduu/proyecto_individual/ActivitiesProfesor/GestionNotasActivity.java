@@ -43,6 +43,8 @@ public class GestionNotasActivity extends AppCompatActivity {
     EditText notaDelEstudiante;
     Spinner nombreEstudiante, tareaAsignada;
     String codigoEst, gradoEst, seccionEst;
+    final String[] gradoProfe = new String[1];
+    final String[] seccionProfe = new String[1];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +52,6 @@ public class GestionNotasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gestion_notas);
 
         //Obteniendo datos grado y seccion
-        final String[] gradoProfe = new String[1];
-        final String[] seccionProfe = new String[1];
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference userDB = FirebaseDatabase.getInstance().getReference().child("usuarios");
         userDB.child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -91,7 +90,7 @@ public class GestionNotasActivity extends AppCompatActivity {
 
                         if (gradoEst.equals(gradoProfe[0]) && seccionEst.equals(seccionProfe[0]) && rol.equals("apoderado")){
                             Log.d("INFOAPP",nombreEst);
-                            listaEstudiantesArray.add(nombreEst);
+                            listaEstudiantesArray.add(nombreEst + " - " + codigoEst);
                         }else {
                             Log.d("INFOAPP","No hay estudiantes");
                         }
@@ -142,13 +141,18 @@ public class GestionNotasActivity extends AppCompatActivity {
         notaDelEstudiante = (EditText) findViewById(R.id.notaAsignada);
         nombreEstudiante = (Spinner) findViewById(R.id.spinnerEstudiantes);
         tareaAsignada = (Spinner) findViewById(R.id.spinnerTareas);
+        DatabaseReference notasDatabase = FirebaseDatabase.getInstance().getReference().child("notas").child(gradoProfe[0] + seccionProfe[0]).child(nombreEstudiante.getSelectedItem().toString());
 
-        DatabaseReference notasDatabase = FirebaseDatabase.getInstance().getReference().child("notas").child(grado + seccion).child(codigoEst);
+        if (Integer.parseInt(notaDelEstudiante.getText().toString()) <= 20 && Integer.parseInt(notaDelEstudiante.getText().toString()) >= 0){
+            notasDatabase.child(tareaAsignada.getSelectedItem().toString()).setValue(notaDelEstudiante.getText().toString());
+            dialog.dismiss();
+            Toast.makeText(getApplicationContext(),"Nota publicada exitosamente", Toast.LENGTH_LONG).show();
+        }else {
+            dialog.dismiss();
+            Toast.makeText(getApplicationContext(),"Debe ingresar una nota entre 0 - 20 y sin decimales", Toast.LENGTH_LONG).show();
+        }
 
-        notasDatabase.child(tareaAsignada.getSelectedItem().toString()).setValue(notaDelEstudiante.getText().toString());
 
-        dialog.dismiss();
-        Toast.makeText(getApplicationContext(),"Nota publicada exitosamente", Toast.LENGTH_LONG).show();
 
     }
 }

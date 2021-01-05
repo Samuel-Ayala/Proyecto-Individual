@@ -106,7 +106,6 @@ public class ProfesorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), GestionNotasActivity.class);
                 startActivity(i);
-                finish();
             }
         });
         ///
@@ -115,16 +114,14 @@ public class ProfesorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), CrearTareaActivity.class);
                 startActivity(i);
-                finish();
             }
         });
         ///
         verQuejas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), EnviarQuejaActivity.class);
+                Intent i = new Intent(getApplicationContext(), QuejasActivity.class);
                 startActivity(i);
-                finish();
             }
         });
         ///
@@ -133,7 +130,6 @@ public class ProfesorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), ListaEstudiantesActivity.class);
                 startActivity(i);
-                finish();
             }
         });
 

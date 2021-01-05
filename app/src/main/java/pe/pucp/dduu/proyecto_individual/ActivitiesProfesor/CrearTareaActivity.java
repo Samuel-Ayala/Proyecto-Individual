@@ -124,6 +124,34 @@ public class CrearTareaActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }else if (imbytes != null){
+                    StorageReference stReference = FirebaseStorage.getInstance().getReference();
+                    final StorageReference fotoRef = stReference.child("fotos").child(nombreCarpetaDispositivo);
+                    fotoRef.putBytes(imbytes).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()){
+                                throw new Exception();
+                            }
+                            return fotoRef.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            Uri downloadLink = task.getResult();
+                            final DatabaseReference currentUserDB = userDatabase.child(grado[0] + seccion[0]).child(nombreCarpetaDispositivo);
+                            currentUserDB.child("curso y titulo de tarea").setValue(curso.getText().toString());
+                            currentUserDB.child("premisa").setValue(premisa.getText().toString());
+                            currentUserDB.child("materiales").setValue(materiales.getText().toString());
+                            currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
+                            currentUserDB.child("foto").setValue(downloadLink.toString());
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });

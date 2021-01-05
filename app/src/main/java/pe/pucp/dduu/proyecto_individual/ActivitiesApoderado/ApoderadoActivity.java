@@ -105,7 +105,6 @@ public class ApoderadoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), NotasActivity.class);
                 startActivity(i);
-                finish();
             }
         });
         ///
@@ -114,7 +113,6 @@ public class ApoderadoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), TareasActivity.class);
                 startActivity(i);
-                finish();
             }
         });
         ///
@@ -123,7 +121,6 @@ public class ApoderadoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), EnviarQuejaActivity.class);
                 startActivity(i);
-                finish();
             }
         });
 
