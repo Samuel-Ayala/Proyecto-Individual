@@ -105,15 +105,15 @@ public class NotasActivity extends AppCompatActivity {
                                 }
 
                                 try {
-                                    float promMate = (Integer.parseInt(snapshot.child("Tarea 1 - Bisutería").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 2 - Bisutería").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 3 - Bisutería").getValue().toString()))/3;
-                                    promedioMate.setText(String.valueOf(promMate));
+                                    double promMate = (Integer.parseInt(snapshot.child("Tarea 1 - Bisutería").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 2 - Bisutería").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 3 - Bisutería").getValue().toString()))/3;
+                                    promedioMate.setText(String.format("%.0f", promMate));
                                 }catch (Exception e){
                                     promedioMate.setText("-");
                                 }
 
                                 try {
-                                    float promComu = (Integer.parseInt(snapshot.child("Tarea 1 - Escultura").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 2 - Escultura").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 3 - Escultura").getValue().toString()))/3;
-                                    promedioComu.setText(String.valueOf(promComu));
+                                    double promComu = (Integer.parseInt(snapshot.child("Tarea 1 - Escultura").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 2 - Escultura").getValue().toString()) + Integer.parseInt(snapshot.child("Tarea 3 - Escultura").getValue().toString()))/3;
+                                    promedioComu.setText(String.format("%.0f", promComu));
                                 }catch (Exception e){
                                     promedioComu.setText("-");
                                 }
