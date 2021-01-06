@@ -30,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +90,6 @@ public class GestionNotasActivity extends AppCompatActivity {
 
 
                         if (gradoEst.equals(gradoProfe[0]) && seccionEst.equals(seccionProfe[0]) && rol.equals("apoderado")){
-                            Log.d("INFOAPP",nombreEst);
                             listaEstudiantesArray.add(nombreEst + " - " + codigoEst);
                         }else {
                             Log.d("INFOAPP","No hay estudiantes");
@@ -143,15 +143,25 @@ public class GestionNotasActivity extends AppCompatActivity {
         tareaAsignada = (Spinner) findViewById(R.id.spinnerTareas);
         DatabaseReference notasDatabase = FirebaseDatabase.getInstance().getReference().child("notas").child(gradoProfe[0] + seccionProfe[0]).child(nombreEstudiante.getSelectedItem().toString());
 
-        if (Integer.parseInt(notaDelEstudiante.getText().toString()) <= 20 && Integer.parseInt(notaDelEstudiante.getText().toString()) >= 0){
-            notasDatabase.child(tareaAsignada.getSelectedItem().toString()).setValue(notaDelEstudiante.getText().toString());
+        try {
+            if (Double.parseDouble(notaDelEstudiante.getText().toString()) <= 20 && Double.parseDouble(notaDelEstudiante.getText().toString()) >= 0){
+                Double nota = Double.parseDouble(notaDelEstudiante.getText().toString());
+                String notaDefinitiva = String.format("%.0f", nota);
+
+                notasDatabase.child(tareaAsignada.getSelectedItem().toString()).setValue(Integer.parseInt(notaDefinitiva));
+                dialog.dismiss();
+                notaDelEstudiante.setText("");
+                Toast.makeText(getApplicationContext(),"Nota publicada exitosamente", Toast.LENGTH_LONG).show();
+            }else {
+                dialog.dismiss();
+                Toast.makeText(getApplicationContext(),"Debe ingresar una nota entre 0 - 20 y sin decimales", Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
             dialog.dismiss();
-            notaDelEstudiante.setText("");
-            Toast.makeText(getApplicationContext(),"Nota publicada exitosamente", Toast.LENGTH_LONG).show();
-        }else {
-            dialog.dismiss();
-            Toast.makeText(getApplicationContext(),"Debe ingresar una nota entre 0 - 20 y sin decimales", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"La nota es en formato numérico, no se permiten letras", Toast.LENGTH_LONG).show();
         }
+
+
 
 
 
