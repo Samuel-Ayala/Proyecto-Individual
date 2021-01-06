@@ -63,12 +63,14 @@ public class ListaEditTareasActivity extends AppCompatActivity {
                                         String premisa = ds.child("premisa").getValue().toString();
                                         String materiales = ds.child("materiales").getValue().toString();
                                         String fecha_limite = ds.child("fecha limite").getValue().toString();
+                                        String tituloBase = ds.child("titulo base").getValue().toString();
 
                                         t.setContenido(premisa);
                                         t.setCursoTarea(cursoYTitulo);
                                         t.setFechaLimite(fecha_limite);
                                         t.setMateriales(materiales);
                                         t.setUrlFoto(urlFoto);
+                                        t.setTituloBase(tituloBase);
 
                                         tareas.add(t);
                                     }

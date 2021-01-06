@@ -67,7 +67,7 @@ public class EditarTareaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editar_tarea);
 
         final EditText cursoTitulo, premisa, materiales, fechaLimite;
-        final Button actualizarDispositivo, cargarFoto, tomarFoto;
+        final Button actualizarTarea, cargarFoto, tomarFoto;
         ImageView imagenDispositivo;
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -76,7 +76,7 @@ public class EditarTareaActivity extends AppCompatActivity {
         final Tareas tarea = (Tareas) intent.getSerializableExtra("Tarea");
         final DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference().child("tareas");
 
-        actualizarDispositivo = (Button) findViewById(R.id.actualizarDispositivoAInventario);
+        actualizarTarea = (Button) findViewById(R.id.actualizarDispositivoAInventario);
         cargarFoto = (Button) findViewById(R.id.cargarFotoEdit);
         tomarFoto = (Button) findViewById(R.id.tomarFotoEdit);
         cursoTitulo = (EditText) findViewById(R.id.cursoTareaEdit);
@@ -98,7 +98,7 @@ public class EditarTareaActivity extends AppCompatActivity {
         final String dateString = sdf.format(date);
         final String[] grado = new String[1];
         final String[] seccion = new String[1];
-        actualizarDispositivo.setOnClickListener(new View.OnClickListener() {
+        actualizarTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final ProgressDialog dialog = new ProgressDialog(EditarTareaActivity.this);
@@ -125,7 +125,7 @@ public class EditarTareaActivity extends AppCompatActivity {
                         }
                     });
 
-                    final String nombreCarpetaDispositivo = cursoTitulo.getText().toString() + "-" + fechaLimite.getText().toString() ;
+                    final String nombreCarpetaDispositivo = tarea.getTituloBase();
 
                     if (rutaDeArchivo != null){
                         StorageReference stReference = FirebaseStorage.getInstance().getReference();
@@ -158,7 +158,7 @@ public class EditarTareaActivity extends AppCompatActivity {
                                 }
 
                                 currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
-                                Log.d("FOTOOOO",downloadLink.toString());
+                                currentUserDB.child("titulo base").setValue(tarea.getTituloBase());
 
                                 if (!downloadLink.toString().isEmpty()){
                                     currentUserDB.child("foto").setValue(downloadLink.toString());
@@ -174,7 +174,10 @@ public class EditarTareaActivity extends AppCompatActivity {
                                 materiales.setText("");
                                 fechaLimite.setText("");
                                 dialog.dismiss();
-                                Toast.makeText(getApplicationContext(), "Tarea actualizada", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Tarea actualizada correctamente", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(EditarTareaActivity.this, ListaEditTareasActivity.class);
+                                EditarTareaActivity.this.startActivity(intent);
+                                finish();
                             }
                         });
                     }else if (imbytes != null){
@@ -208,6 +211,7 @@ public class EditarTareaActivity extends AppCompatActivity {
                                 }
 
                                 currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
+                                currentUserDB.child("titulo base").setValue(tarea.getTituloBase());
 
                                 if (!downloadLink.toString().isEmpty()){
                                     currentUserDB.child("foto").setValue(downloadLink.toString());
@@ -223,7 +227,10 @@ public class EditarTareaActivity extends AppCompatActivity {
                                 materiales.setText("");
                                 fechaLimite.setText("");
                                 dialog.dismiss();
-                                Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Tarea actualizada correctamente", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(EditarTareaActivity.this, ListaEditTareasActivity.class);
+                                EditarTareaActivity.this.startActivity(intent);
+                                finish();
                             }
                         });
                     }else {
@@ -256,7 +263,8 @@ public class EditarTareaActivity extends AppCompatActivity {
                                     }
 
                                     currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
-                                    currentUserDB.child("foto").setValue("https://firebasestorage.googleapis.com/v0/b/proyecto-individual---ap-c1043.appspot.com/o/fotos%2Fimagen_no-disponible.jpg?alt=media&token=c03cb9a4-cd3e-4fe6-a163-e9fdf31970e7");
+                                    currentUserDB.child("foto").setValue(tarea.getUrlFoto());
+                                    currentUserDB.child("titulo base").setValue(tarea.getTituloBase());
 
                                     cursoTitulo.setText("");
                                     premisa.setText("");
@@ -264,7 +272,10 @@ public class EditarTareaActivity extends AppCompatActivity {
                                     fechaLimite.setText("");
 
                                     dialog.dismiss();
-                                    Toast.makeText(getApplicationContext(), "Tarea asignada a los alumnos sin foto", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Tarea actualizada correctamente", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(EditarTareaActivity.this, ListaEditTareasActivity.class);
+                                    EditarTareaActivity.this.startActivity(intent);
+                                    finish();
                                 }else {
                                     Toast.makeText(getApplicationContext(), "Error: la base de datos no responde", Toast.LENGTH_SHORT).show();
                                 }

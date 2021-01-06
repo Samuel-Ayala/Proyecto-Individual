@@ -77,7 +77,7 @@
                     <Button
                         android:id="@+id/eliminarTarea"
                         android:layout_width="match_parent"
-                        android:visibility="gone"
+
                         android:layout_height="30dp"
                         android:layout_marginTop="6dp"
                         android:text="Eliminar"

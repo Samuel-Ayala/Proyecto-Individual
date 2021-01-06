@@ -33,6 +33,7 @@ import java.util.List;
 
 import pe.pucp.dduu.proyecto_individual.ActivitiesGeneral.LoginRegistroActivity;
 import pe.pucp.dduu.proyecto_individual.ActivitiesProfesor.EditarTareaActivity;
+import pe.pucp.dduu.proyecto_individual.ActivitiesProfesor.ListaEditTareasActivity;
 import pe.pucp.dduu.proyecto_individual.ActivitiesProfesor.ProfesorActivity;
 import pe.pucp.dduu.proyecto_individual.Entity.Tareas;
 import pe.pucp.dduu.proyecto_individual.R;
@@ -93,6 +94,7 @@ public class ListaEditTareasAdapter extends RecyclerView.Adapter<ListaEditTareas
                 t.setFechaLimite(tarea.getFechaLimite());
                 t.setCursoTarea(tarea.getCursoTarea());
                 t.setContenido(tarea.getContenido());
+                t.setTituloBase(tarea.getTituloBase());
 
                 intent.putExtra("Tarea", t);
                 context.startActivity(intent);
@@ -114,15 +116,13 @@ public class ListaEditTareasAdapter extends RecyclerView.Adapter<ListaEditTareas
                             //Elimino referencia database
                             grado[0] = snapshot.child("grado").getValue().toString();
                             seccion[0] = snapshot.child("seccion").getValue().toString();
-                            final String nombreCarpetaDispositivo = tarea.getCursoTarea() + "-" + tarea.getFechaLimite() ;
-                            Log.d("INFO APPPPPPPPPPP", grado[0] + seccion[0] + nombreCarpetaDispositivo);
-                            final DatabaseReference currentTareaDB = userDatabase.child(grado[0] + seccion[0]).child(nombreCarpetaDispositivo);
+                            Log.d("INFO APPPPPPPPPPP", grado[0] + seccion[0] + tarea.getTituloBase());
+                            final DatabaseReference currentTareaDB = userDatabase.child(grado[0] + seccion[0]).child(tarea.getTituloBase());
 
-                            currentTareaDB.child(nombreCarpetaDispositivo).child("curso y titulo de tarea").removeValue();
-                            currentTareaDB.child(nombreCarpetaDispositivo).child("fecha limite").removeValue();
-                            currentTareaDB.child(nombreCarpetaDispositivo).child("foto").removeValue();
-                            currentTareaDB.child(nombreCarpetaDispositivo).child("materiales").removeValue();
-                            currentTareaDB.child(nombreCarpetaDispositivo).child("premisa").removeValue();
+                            currentTareaDB.removeValue();
+
+                            Intent intent = new Intent(context, ListaEditTareasActivity.class);
+                            context.startActivity(intent);
 
                             /*currentTareaDB.child(nombreCarpetaDispositivo).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

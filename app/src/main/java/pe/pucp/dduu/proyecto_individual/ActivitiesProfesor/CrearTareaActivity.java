@@ -135,7 +135,7 @@ public class CrearTareaActivity extends AppCompatActivity {
                                 }
 
                                 currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
-                                Log.d("FOTOOOO",downloadLink.toString());
+                                currentUserDB.child("titulo base").setValue(nombreCarpetaDispositivo);
 
                                 if (!downloadLink.toString().isEmpty()){
                                     currentUserDB.child("foto").setValue(downloadLink.toString());
@@ -185,6 +185,7 @@ public class CrearTareaActivity extends AppCompatActivity {
                                     }
 
                                     currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
+                                    currentUserDB.child("titulo base").setValue(nombreCarpetaDispositivo);
 
                                     if (!downloadLink.toString().isEmpty()){
                                         currentUserDB.child("foto").setValue(downloadLink.toString());
@@ -234,6 +235,7 @@ public class CrearTareaActivity extends AppCompatActivity {
 
                                     currentUserDB.child("fecha limite").setValue(fechaLimite.getText().toString());
                                     currentUserDB.child("foto").setValue("https://firebasestorage.googleapis.com/v0/b/proyecto-individual---ap-c1043.appspot.com/o/fotos%2Fimagen_no-disponible.jpg?alt=media&token=c03cb9a4-cd3e-4fe6-a163-e9fdf31970e7");
+                                    currentUserDB.child("titulo base").setValue(nombreCarpetaDispositivo);
 
                                     curso.setText("");
                                     premisa.setText("");

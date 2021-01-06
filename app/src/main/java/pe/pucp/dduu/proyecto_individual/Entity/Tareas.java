@@ -8,6 +8,7 @@ public class Tareas implements Serializable {
     private String materiales;
     private String fechaLimite;
     private String urlFoto;
+    private String tituloBase;
 
     public String getContenido() {
         return contenido;
@@ -47,5 +48,13 @@ public class Tareas implements Serializable {
 
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
+    }
+
+    public String getTituloBase() {
+        return tituloBase;
+    }
+
+    public void setTituloBase(String tituloBase) {
+        this.tituloBase = tituloBase;
     }
 }
